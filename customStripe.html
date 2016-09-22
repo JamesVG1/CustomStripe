@@ -1,0 +1,75 @@
+<html>
+<head>
+ <title>Custom Stripe Payment Button - Stripe Checkout</title>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+ <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+ <!-- Scripts -->
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
+ <!--For the Custom Payment Form -->
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<script type="text/javascript">
+  Stripe.setPublishableKey('pk_test_wRhL7fi2UzZDtArbrtVHkEVn');
+</script>
+<head>
+
+<!--BODY START -->
+<body style="padding-top: 70px;">
+
+<div class="" style="height:300px;padding-left:40px;padding-right:10px;">
+
+<!-- Pre-Payment -->
+<div id="prePayment" style="padding-top:300px;" class="col-lg-4 col-md-4 col-sm-6 sol-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-3">
+<button class="form-control buttonHover" id="purchaseButton" style="background:#dff0d8;" type="button" name="button" onclick="showPayment()"><b>Purchase Voucher</b></button>
+</div>
+
+<script>
+    function showPayment(){
+
+        $(".stripe-button-el").click();
+    };
+
+    $(window).load(function() {
+        $("#makePayment").hide();
+    });
+</script>
+
+<!-- Payment Div Start -->
+<div id="makePayment">
+
+<!-- payment source -->
+    <form class="form-horizontal" method="post" action="charge.php">
+    <center>
+    <fieldset>
+
+    <!-- <input type="hidden" id="amountID" name="totalAmount" value="<?php echo ceil($amount)*100; ?>" > -->
+        <script
+        StripeCheckout.open({
+              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key= "pk_test_wRhL7fi2UzZDtArbrtVHkEVn"
+              data-name="Hygeia Maid"
+              data-description="1Bed/1Bath Move-in/Move-out"
+              data-email= "Support@HygeiaMaid.com"
+              data-allow-remember-me = "false"
+              data-amount= "13900",
+              data-image="https://s3.amazonaws.com/stripe-uploads/acct_16VtIbI28UvQaveimerchant-icon-1444496571861-Logo.jpg"
+              data-locale="auto">
+            });
+        </script>
+    </fieldset>
+    </center>
+    <br/>
+    <br/>
+    </form>
+</div> <!-- Payment Div -->
+
+</div>
+</body>
+</html>
